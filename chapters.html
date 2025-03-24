@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Chapter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Select Chapter</h1>
+    <ul id="chaptersList"></ul>
+    <a href="index.html">🔙 Back to Subjects</a>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const subject = urlParams.get('subject');
+
+    const chapters = {
+      biology: [
+        'Circulation',
+        'Cell Cycle',
+        'Plant Kingdom'
+      ],
+      physics: [
+        'Kinematics',
+        'Thermal Physics',
+        'Electrostatics'
+      ],
+      chemistry: [
+        'Periodic Table',
+        'Mole Concept',
+        'Chemical Bonding'
+      ]
+    };
+
+    const list = document.getElementById("chaptersList");
+    (chapters[subject] || []).forEach(chapter => {
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="quiz.html?subject=${subject}&chapter=${chapter}">${chapter}</a>`;
+      list.appendChild(li);
+    });
+  </script>
+</body>
+</html>
