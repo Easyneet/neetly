@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Biology - Circulation Quiz</title>
+  <title>Select Subject</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Biology - Circulation Chapter</h1>
-    <div id="timer">Time Left: 5:00</div>
-    <form id="quizForm"></form>
-    <button onclick="submitQuiz()">Submit</button>
-    <div id="results"></div>
+    <h1>Select Subject</h1>
+    <ul>
+      <li><a href="chapters.html?subject=biology">Biology</a></li>
+      <li><a href="chapters.html?subject=physics">Physics</a></li>
+      <li><a href="chapters.html?subject=chemistry">Chemistry</a></li>
+    </ul>
   </div>
-  <script src="script.js"></script>
 </body>
 </html>
