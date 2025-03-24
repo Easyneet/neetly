@@ -1,0 +1,115 @@
+const questions = [
+  "Blood is a special __________ tissue.",
+  "Blood consists of plasma and __________ elements.",
+  "Plasma is a __________ coloured, viscous fluid.",
+  "Plasma constitutes nearly _____ per cent of blood.",
+  "Plasma contains _____-_____ per cent water.",
+  "Plasma proteins contribute _____-_____ per cent.",
+  "Major plasma proteins are fibrinogen, __________ and albumins.",
+  "__________ are needed for clotting of blood.",
+  "__________ are involved in defense mechanisms.",
+  "Albumins help in __________ balance.",
+  "Plasma contains minerals like Na+, Ca++, Mg++, __________, Cl–.",
+  "Plasma has nutrients like glucose, __________ acids, and lipids.",
+  "Coagulation factors in plasma are present in __________ form.",
+  "Plasma without clotting factors is called __________.",
+  "Erythrocytes, leucocytes, and __________ are called formed elements.",
+  "Formed elements constitute nearly _____ per cent of blood.",
+  "Erythrocytes are also called __________ blood cells.",
+  "RBC count in healthy adult men is _____ to _____ million/mm³.",
+  "RBCs are formed in the __________ bone marrow.",
+  "RBCs lack __________ in most mammals.",
+  "RBCs are __________ in shape.",
+  "Haemoglobin is an iron-containing __________ protein.",
+  "Haemoglobin gives RBCs their red __________.",
+  "A healthy person has _____-_____ grams of haemoglobin per 100 ml of blood.",
+  "Haemoglobin transports __________ gases.",
+  "Average life span of RBCs is _____ days.",
+  "RBCs are destroyed in the __________ (graveyard of RBCs).",
+  "Leucocytes are also called __________ blood cells.",
+  "WBCs lack __________, making them colourless.",
+  "WBC count averages _____-_____ mm³ of blood.",
+  "Leucocytes are generally __________ lived.",
+  "Two main categories of WBCs are granulocytes and __________.",
+  "Granulocytes include neutrophils, eosinophils, and __________.",
+  "Agranulocytes include lymphocytes and __________.",
+  "__________ are the most abundant WBCs (60-65%).",
+  "__________ are the least abundant WBCs (0.5-1%).",
+  "Neutrophils and monocytes are __________ cells.",
+  "Phagocytic cells destroy __________ organisms.",
+  "Basophils secrete histamine, __________, and heparin.",
+  "Basophils are involved in __________ reactions.",
+  "Eosinophils make up _____-_____ per cent of WBCs.",
+  "Eosinophils resist __________.",
+  "Plasma is about _____ per cent water.",
+  "Serum is plasma without __________ factors.",
+  "RBCs contain the pigment __________.",
+  "Average RBC life span is _____ days.",
+  "Spleen is known as the __________ of RBCs.",
+  "WBCs are __________ and nucleated.",
+  "Granulocytes have visible __________ in their cytoplasm.",
+  "Agranulocytes lack __________ in their cytoplasm."
+];
+
+const answers = [
+  "connective", "formed", "straw", "55", "90-92", "6-8", "globulins", "fibrinogen",
+  "globulins", "osmotic", "HCO3–", "amino", "inactive", "serum", "platelets", "45",
+  "red", "5", "red", "nucleus", "biconcave", "conjugated", "colour", "12-16", "respiratory",
+  "120", "spleen", "white", "haemoglobin", "6000-8000", "short", "agranulocytes",
+  "basophils", "monocytes", "neutrophils", "basophils", "phagocytic", "foreign",
+  "serotonin", "inflammatory", "2-3", "allergies", "90-92", "clotting", "haemoglobin",
+  "120", "graveyard", "colourless", "granules", "granules"
+];
+
+window.onload = () => {
+  const quizForm = document.getElementById("quizForm");
+
+  questions.forEach((q, idx) => {
+    const div = document.createElement("div");
+    div.className = "question";
+    div.innerHTML = `
+      <p>${idx + 1}. ${q}</p>
+      <input type="text" id="q${idx}" />
+    `;
+    quizForm.appendChild(div);
+  });
+
+  startTimer(5 * 60);
+};
+
+function submitQuiz() {
+  const resultsDiv = document.getElementById("results");
+  let output = "<h3>Results:</h3><ol>";
+
+  questions.forEach((q, idx) => {
+    const userAns = document.getElementById(`q${idx}`).value.trim().toLowerCase();
+    const correctAns = answers[idx].toLowerCase();
+
+    if (userAns === correctAns) {
+      output += `<li>✅ ${q} <strong>${correctAns}</strong></li>`;
+    } else {
+      output += `<li>❌ ${q} <strong>${correctAns}</strong></li>`;
+    }
+  });
+
+  output += "</ol>";
+  resultsDiv.innerHTML = output;
+}
+
+function startTimer(duration) {
+  let timer = duration, minutes, seconds;
+  const timerDisplay = document.getElementById("timer");
+
+  const countdown = setInterval(() => {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+
+    if (--timer < 0) {
+      clearInterval(countdown);
+      submitQuiz();
+      alert("Time is up! Test submitted automatically.");
+    }
+  }, 1000);
+}
